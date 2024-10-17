@@ -3,7 +3,7 @@ from abc import ABC, abstractmethod
 import pandas as pd
 
 from src.app.features.cot.data.base.abstract_cot_report_downloader import AbstractCOTReportDownloader
-from src.app.utils.base.abstract_dataframe_rule import AbstractDataFrameRule
+from src.app.utils.dataframe_rule import DataFrameRule
 
 
 class AbstractCOTRepository(ABC):
@@ -20,7 +20,7 @@ class AbstractCOTRepository(ABC):
         self._cot_report_downloader = cot_report_downloader
 
     @abstractmethod
-    def fetch_report(self, dataframe_rule: AbstractDataFrameRule) -> pd.DataFrame:
+    def fetch_report(self, dataframe_rule: DataFrameRule) -> pd.DataFrame:
         """
         Handles COT report fetching. First checks if the locally stored COT report is valid, then returns it,
         if not, downloads the report from the official CFTC Website.
