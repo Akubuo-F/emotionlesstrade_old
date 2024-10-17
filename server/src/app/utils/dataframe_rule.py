@@ -55,6 +55,6 @@ class DataFrameRule:
         return self
 
     @property
-    def retrieve_dataframe(self) -> pd.DataFrame:
+    def apply(self) -> pd.DataFrame:
         """returns the data frame."""
         return self._dataframe
