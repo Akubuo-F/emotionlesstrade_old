@@ -1,3 +1,5 @@
+from typing import Callable
+
 import pandas as pd
 
 class DataFrameRule:
@@ -9,7 +11,8 @@ class DataFrameRule:
         """
         :param dataframe: Data frame rules will be applied on.
         """
-        self._dataframe = dataframe
+        self._dataframe: pd.DataFrame = dataframe
+        self._future_rules: list[Callable[[], "DataFrameRule"]] = []  # list of functions; () -> DataFrameRule.
 
     def keep_only_columns(self, columns: list[str]) -> "DataFrameRule":
         """
@@ -55,7 +58,46 @@ class DataFrameRule:
         self._dataframe = self._dataframe[self._dataframe[column].isin(values)]
         return self
 
+    def set_dataframe(self, dataframe: pd.DataFrame) -> None:
+        self._dataframe = dataframe
+
+    def set_future_rules(self, future_rules: list[Callable]):
+        """
+        Set rules that can be applied later to the data frame.
+        :param future_rules: List of functions that take a data frame and returns a modified data frame.
+        :return:
+        """
+        self._future_rules = future_rules
+
+    @property
+    def apply_future_rules(self) -> pd.DataFrame:
+        """applies the set future rules on the data frame and returns it."""
+        for rule in self._future_rules:
+            self._dataframe = rule().apply
+        return self._dataframe
+
     @property
     def apply(self) -> pd.DataFrame:
         """returns the data frame."""
         return self._dataframe
+
+
+if __name__ == '__main__':
+    data = {
+        'Name': ['Gold', 'Silver', 'Dollar', 'Bitcoin'],
+        'Value': [1500, 15, 1, 60000]
+    }
+    df = pd.DataFrame(data)
+
+    df_rule = DataFrameRule(df)
+    rules = [
+            lambda : df_rule.keep_only_columns(['Name']),
+            lambda : df_rule.rename_columns_to(['AssetName']),
+            lambda : df_rule.sort_by('AssetName', increasing=False),
+            lambda : df_rule.keep_only_values('AssetName', ['Gold', 'Bitcoin'])
+        ]
+
+    df_rule.set_future_rules(rules)
+    new_df = df_rule.apply_future_rules
+
+    print(new_df)
