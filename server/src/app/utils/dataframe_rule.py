@@ -24,29 +24,30 @@ class DataFrameRule:
     def rename_columns_to(self, new_columns: list[str]) -> "DataFrameRule":
         """
         Renames all the columns in the data frame to the new column according to their orderings.
-        So make sure the ith column in the dataframe matches the new_columns[i].
+        Make sure the ith column in the dataframe you want to rename matches new_columns[i].
         :param new_columns: New column names.
         :return: DataFrameRule
         """
         self._dataframe.columns = new_columns
         return self
 
-    def sort_by(self, column: str, increasing_order: bool = True) -> "DataFrameRule":
+    def sort_by(self, column: str, increasing: bool = True) -> "DataFrameRule":
         """
         Sorts the specified column in the order specified.
         Make sure the column specified exists in the data frame.
         :param column: column to sort.
-        :param increasing_order: sorting order of the column.
+        :param increasing: sorting order of the column.
         :return: DataFrameRule
         """
-        self._dataframe = self._dataframe.sort_values(by=column, ascending=increasing_order)
+        self._dataframe = self._dataframe.sort_values(by=column, ascending=increasing)
         return self
 
     def keep_only_values(self, column: str, values: list[str]) -> "DataFrameRule":
         """
         Keeps only the values of a column you want in the data frame.
-        For example, in the Name column, you want to keep only names Gold, Silver, and Dollar.
-        This will keep retain in the data frame rows where the Name column has values of Gold, Silver, and Dollar.
+        For example, if in the AssetName column, you want to keep only Gold, Silver, and Dollar.
+        This will keep in the data frame only rows where their AssetName column has values of Gold,
+        Silver, or Dollar.
         :param column: Column that contains the values you want to keep.
         :param values: Values to keep.
         :return: DataFrameRule
