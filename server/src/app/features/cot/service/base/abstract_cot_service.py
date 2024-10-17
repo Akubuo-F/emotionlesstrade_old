@@ -15,7 +15,7 @@ class AbstractCOTService(ABC):
             self,
             reported_assets: list[Asset],
             cot_report_downloader: AbstractCOTReportDownloader,
-    ) -> COTReport:
+    ) -> list[COTReport]:
         """
         Gets the latest report of the assets listed in reported assets.
         :param reported_assets: A list of tradable financial instruments.
