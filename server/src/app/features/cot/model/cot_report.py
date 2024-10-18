@@ -118,3 +118,25 @@ class COTReport:
         previous_open_interest: int = util.do_difference(open_interest, open_interest_change)
         current_and_previous_open_interest: int = util.do_sum(open_interest, previous_open_interest)
         return util.do_percentage(open_interest_change, current_and_previous_open_interest)
+
+
+def calculate_percentage_change_long_short_and_net(long, short, net, long_change, short_change) -> list[float]:
+    previous_long: int = util.do_difference(long, long_change)
+    previous_short: int = util.do_difference(short, short_change)
+    current_and_previous_long = util.do_abs_sum(long, previous_long)
+    current_and_previous_short = util.do_abs_sum(short, previous_short)
+    percentage_long_change: float = util.do_percentage(long_change, current_and_previous_long)
+    percentage_short_change: float = util.do_percentage(short_change, current_and_previous_short)
+
+    previous_net: int = util.do_difference(previous_long, previous_short)
+    net_change: int = util.do_difference(net, previous_net)
+    current_and_previous_net: int = util.do_abs_sum(net, previous_net) # should be until.do_sum(abs(net), abs(previous))
+    percentage_net_change: float = util.do_percentage(net_change, current_and_previous_net)
+    return [percentage_long_change, percentage_short_change, percentage_net_change]
+
+print(calculate_percentage_change_long_short_and_net(
+    long=25235,
+    short=25473,
+    net=25235-25473,
+    long_change=25235-25473,
+    short_change=28954-28964))
