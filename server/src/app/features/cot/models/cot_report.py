@@ -117,3 +117,12 @@ class COTReport:
         previous_open_interest: int = util.do_difference(open_interest, open_interest_change)
         current_and_previous_open_interest: int = util.do_abs_sum(open_interest, previous_open_interest)
         return util.do_percentage(open_interest_change, current_and_previous_open_interest)
+
+    def __repr__(self):
+        result = "COT Report:\n"
+        for key, value in self.to_dict().items():
+            result += f"{key} = {value}\n"
+        return result
+
+    def __str__(self):
+        return self.__repr__()
