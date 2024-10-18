@@ -2,7 +2,10 @@ from typing import Callable
 
 import pandas as pd
 
-class DataFrameRule:
+from src.app.utils.base.abstract_dataframe_rule import AbstractDataFrameRule
+
+
+class DataFrameRule(AbstractDataFrameRule):
     """
     A set of rules that will be applied on a data frame to modify the data frame.
     """

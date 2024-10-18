@@ -1,10 +1,9 @@
 from src.app.utils import util
-from src.app.utils.util import do_percentage, do_abs_sum, do_difference
 
 
 class COTReport:
     """
-    A report issued by the CFTC showing the positions of market participants (Noncommercial).
+    A report issued by the CFTC, showing the positions of market participants (Noncommercial).
     """
 
     def __init__(
@@ -21,7 +20,7 @@ class COTReport:
         :param short: number of short contracts.
         :param long_change: change in long contracts from the previous report.
         :param short_change: change in short contacts from the previous report.
-        :param open_interest: change in open interest from the previous report.
+        :param open_interest: number of open interests.
         :param open_interest_change: change in open interest from the previous report.
         """
         percentage_long_short_and_float: list[float] = COTReport._calculate_percentage_long_short_and_net(long, short)
@@ -116,5 +115,5 @@ class COTReport:
     @staticmethod
     def _calculate_open_interest_percentage_change(open_interest: int, open_interest_change: int):
         previous_open_interest: int = util.do_difference(open_interest, open_interest_change)
-        current_and_previous_open_interest: int = util.do_sum(open_interest, previous_open_interest)
+        current_and_previous_open_interest: int = util.do_abs_sum(open_interest, previous_open_interest)
         return util.do_percentage(open_interest_change, current_and_previous_open_interest)

@@ -44,10 +44,8 @@ class TestCOTReport(unittest.TestCase):
 
     def test_percentage_open_interest_change(self):
         expected = round((200/2800)*100, 1)
-        self.assertAlmostEqual(
-            expected,
-            self.cot_report.percentage_open_interest_change
-        )
+        print(expected)
+        self.assertAlmostEqual(expected, self.cot_report.percentage_open_interest_change)
 
     def test_to_dict(self):
         self.assertLess(0, len(self.cot_report.to_dict()))
