@@ -51,4 +51,4 @@ class PDFGenerator(AbstractPDFGenerator):
 
 
 if __name__ == '__main__':
-    PDFGenerator.cot_report_calculation("cot_report_formulas.pdf")
+    PDFGenerator.cot_report_calculation("../../../cot_report_formulas.pdf")
