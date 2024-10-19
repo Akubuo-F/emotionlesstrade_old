@@ -37,6 +37,15 @@ class DataFrameRule(AbstractDataFrameRule):
         self._dataframe.columns = new_columns
         return self
 
+    def remove_duplicates(self, columns: str) -> "DataFrameRule":
+        """
+        Keeps only one copy of each value in the column.
+        :param columns: Target columns to remove their duplicate values.
+        :return:
+        """
+        self._dataframe = self._dataframe.drop_duplicates(subset=columns)
+        return self
+
     def sort_by(self, column: str, increasing: bool = True) -> "DataFrameRule":
         """
         Sorts the specified column in the order specified.

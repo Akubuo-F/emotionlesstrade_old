@@ -1,3 +1,4 @@
+from src.app.domain.models.asset import Asset
 from src.app.utils import util
 
 
@@ -8,6 +9,8 @@ class COTReport:
 
     def __init__(
             self,
+            released_on: str,
+            asset: Asset,
             long: int,
             short: int,
             long_change: int,
@@ -16,6 +19,7 @@ class COTReport:
             open_interest_change: int
     ):
         """
+        :param asset: A tradable financial instrument.
         :param long: number of long contracts.
         :param short: number of short contracts.
         :param long_change: change in long contracts from the previous report.
@@ -23,6 +27,8 @@ class COTReport:
         :param open_interest: number of open interests.
         :param open_interest_change: change in open interest from the previous report.
         """
+        self._released_on = released_on
+        self._asset = asset
         percentage_long_short_and_float: list[float] = COTReport._calculate_percentage_long_short_and_net(long, short)
         self._percentage_long = percentage_long_short_and_float[0]
         self._percentage_short = percentage_long_short_and_float[1]
@@ -45,6 +51,8 @@ class COTReport:
     def to_dict(self) -> dict:
         """returns a dictionary representation of the COT report."""
         return {
+            "released_on": self._released_on,
+            "asset_name": f"{self._asset.name} {self._asset.instrument_type}",
             "percentage_long": self._percentage_long,
             "percentage_short": self._percentage_short,
             "percentage_net": self._percentage_net,

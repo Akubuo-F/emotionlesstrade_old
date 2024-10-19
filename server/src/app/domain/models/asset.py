@@ -4,10 +4,10 @@ class InstrumentType:
     """
     A Category for an asset.
     """
-    CURRENCY: Final[str] = "Currency"
-    COMMODITY: Final[str] = "Commodity"
-    INDEX: Final[str] = "Index"
-    CRYPTO: Final[str] = "Crypto"
+    CURRENCY: Final[str] = "CURRENCY"
+    COMMODITY: Final[str] = "COMMODITY"
+    INDEX: Final[str] = "INDEX"
+    CRYPTO: Final[str] = "CRYPTO"
 
 class Asset:
     """
@@ -51,15 +51,16 @@ class ReportedAssets:
     eur: Final[Asset] = Asset(code="EUR", name="EURO", instrument_type=InstrumentType.CURRENCY)
     gbp: Final[Asset] = Asset(code="GBP", name="BRITISH POUND", instrument_type=InstrumentType.CURRENCY)
     jpy: Final[Asset] = Asset(code="JPY", name="JAPANESE YEN", instrument_type=InstrumentType.CURRENCY)
-    nzd: Final[Asset] = Asset(code="NZD", name="NZ DOLLAR", instrument_type=InstrumentType.CURRENCY)
+    nzd: Final[Asset] = Asset(code="NZD", name="NEW ZEALAND DOLLAR", instrument_type=InstrumentType.CURRENCY)
     ndx: Final[Asset] = Asset(code="NDX", name="NASDAQ", instrument_type=InstrumentType.INDEX)
     spx: Final[Asset] = Asset(code="SPX", name="S&P 500", instrument_type=InstrumentType.INDEX)
+    usd: Final[Asset] = Asset(code="USD", name="US DOLLAR", instrument_type=InstrumentType.CURRENCY)
     uso: Final[Asset] = Asset(code="USO", name="CRUDE OIL", instrument_type=InstrumentType.COMMODITY)
     xag: Final[Asset] = Asset(code="XAG", name="SILVER", instrument_type=InstrumentType.COMMODITY)
     xau: Final[Asset] = Asset(code="XAU", name="GOLD", instrument_type=InstrumentType.COMMODITY)
     xcu: Final[Asset] = Asset(code="XCU", name="COPPER", instrument_type=InstrumentType.COMMODITY)
     xpt: Final[Asset] = Asset(code="XPT", name="PLATINUM", instrument_type=InstrumentType.COMMODITY)
-    ALL: Final[list[Asset]] = [aud, btc, cad, chf, dji, eur, gbp, jpy, nzd, ndx, spx, uso, xag, xau, xcu, xpt]
+    ALL: Final[list[Asset]] = [aud, btc, cad, chf, dji, eur, gbp, jpy, nzd, ndx, spx, usd, uso, xag, xau, xcu, xpt]
 
 
 

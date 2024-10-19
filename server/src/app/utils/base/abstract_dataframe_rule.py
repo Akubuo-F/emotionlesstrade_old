@@ -40,6 +40,15 @@ class AbstractDataFrameRule(ABC):
         ...
 
     @abstractmethod
+    def remove_duplicates(self, columns: list[str]) -> "AbstractDataFrameRule":
+        """
+        Keeps only one copy of each value in the column.
+        :param columns: Target columns to remove their duplicate values.
+        :return:
+        """
+        ...
+
+    @abstractmethod
     def keep_only_values(self, column: str, values: list[str]) -> "AbstractDataFrameRule":
         """
         Keeps only the values of a column you want in the data frame.
