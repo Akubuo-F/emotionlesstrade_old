@@ -23,7 +23,7 @@ class COTService(AbstractCOTService):
     ) -> list[COTReport]:
         market_and_exchange_names: list[str] = cot_report_source.convert(reported_assets)
         rules: list[Callable[[], AbstractDataFrameRule]] = [
-            lambda: dataframe_rule.keep_only_columns(cot_report_source.columns_to_keep),
+            lambda: dataframe_rule.keep_only_columns(cot_report_source.columns_to_keep()),
             lambda: dataframe_rule.rename_columns_to(COTReportDataFrameFormats.COLUMN_NAMES),
             lambda: dataframe_rule.keep_only_values(
                 column=COTReportDataFrameFormats.COLUMN_NAMES[0],
@@ -41,6 +41,7 @@ class COTService(AbstractCOTService):
         ]
         dataframe_rule.set_future_rules(rules)
         dataframe: pd.DataFrame = cot_repository.fetch_report(dataframe_rule)
+        cot_repository.store_report(dataframe)
         return self._make_cot_report(dataframe, cot_report_source)
 
 

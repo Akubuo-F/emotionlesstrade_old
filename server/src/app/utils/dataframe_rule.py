@@ -24,6 +24,7 @@ class DataFrameRule(AbstractDataFrameRule):
         :param columns: Columns to keep.
         :return: DataFrameRule
         """
+        print(self._dataframe.head())
         self._dataframe = self._dataframe[columns]
         return self
 

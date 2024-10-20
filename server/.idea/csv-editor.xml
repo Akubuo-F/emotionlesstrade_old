@@ -3,17 +3,10 @@
   <component name="CsvFileAttributes">
     <option name="attributeMap">
       <map>
-        <entry key="\src\app\features\cot\data\6months_cot_report.csv">
+        <entry key="\test\app\features\data\test_local_csv.csv">
           <value>
             <Attribute>
               <option name="separator" value="," />
-            </Attribute>
-          </value>
-        </entry>
-        <entry key="\src\app\features\cot\data\report.csv">
-          <value>
-            <Attribute>
-              <option name="separator" value="|" />
             </Attribute>
           </value>
         </entry>

@@ -71,8 +71,8 @@ class CFTCCotReportSource(AbstractCOTReportSource):
                     if asset.code == key:
                         return asset
 
-    @property
-    def columns_to_keep(self) -> list[str]:
+    @staticmethod
+    def columns_to_keep() -> list[str]:
         return CFTCCotReportSource.COLUMNS_TO_KEEP
 
 

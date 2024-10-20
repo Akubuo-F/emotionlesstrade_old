@@ -129,6 +129,8 @@ class COTReport:
     def __repr__(self):
         result = "COT Report:\n"
         for key, value in self.to_dict().items():
+            if key not in ["released_on", "asset_name"]:
+                value = f"{value}%"
             result += f"{key} = {value}\n"
         return result
 
