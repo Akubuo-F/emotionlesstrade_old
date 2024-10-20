@@ -1,3 +1,5 @@
+import os.path
+
 import pandas as pd
 
 from src.app.features.cot.data.base.abstract_cot_report_downloader import AbstractCOTReportDownloader
@@ -14,6 +16,10 @@ class COTRepository(AbstractCOTRepository):
         )
 
     def fetch_report(self, dataframe_rule: AbstractDataFrameRule) -> pd.DataFrame:
+        if self._local_csv.endswith(".csv") and os.path.exists(self._local_csv):
+            print("fetching from local.")
+            return pd.read_csv(self._local_csv)
+        print("Downloading report...")
         data: pd.DataFrame = self._cot_report_downloader.download()
         dataframe_rule.set_dataframe(data)
         return dataframe_rule.apply_future_rules

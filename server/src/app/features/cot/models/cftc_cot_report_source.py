@@ -36,7 +36,10 @@ class CFTCCotReportSource(AbstractCOTReportSource):
         "Change in Noncommercial-Short (All)",
     ]
 
-    def convert(self, assets: list[Asset]) -> list[str]:
+    REPORT_TYPE: Final[str] = "legacy_fut"
+
+    @staticmethod
+    def convert(assets: list[Asset]) -> list[str]:
         """
         Converts the names of the listed to how they are represented on the CFTC
         COT report.
@@ -52,13 +55,21 @@ class CFTCCotReportSource(AbstractCOTReportSource):
             market_and_exchange_names.append(asset_market_and_exchange_name)
         return market_and_exchange_names
 
-    def get_asset(self, market_and_exchange_name: str) -> Asset:
+    @staticmethod
+    def date_column_name() -> str:
+        return CFTCCotReportSource.COLUMNS_TO_KEEP[1]
+
+    @staticmethod
+    def report_type() -> str:
+        return CFTCCotReportSource.REPORT_TYPE
+
+    @staticmethod
+    def get_asset(market_and_exchange_name: str) -> Asset:
         for key, value in CFTCCotReportSource.MARKET_AND_EXCHANGE_NAMES.items():
             if value == market_and_exchange_name:
                 for asset in ReportedAssets.ALL:
                     if asset.code == key:
                         return asset
-
 
     @property
     def columns_to_keep(self) -> list[str]:

@@ -14,7 +14,7 @@ class DataFrameRule(AbstractDataFrameRule):
         """
         :param dataframe: Data frame rules will be applied on.
         """
-        self._dataframe: pd.DataFrame = dataframe
+        self._dataframe = dataframe
         self._future_rules: list[Callable[[], "DataFrameRule"]] = []  # list of functions; () -> DataFrameRule.
 
     def keep_only_columns(self, columns: list[str]) -> "DataFrameRule":
@@ -92,24 +92,3 @@ class DataFrameRule(AbstractDataFrameRule):
     def apply(self) -> pd.DataFrame:
         """returns the data frame."""
         return self._dataframe
-
-
-if __name__ == '__main__':
-    data = {
-        'Name': ['Gold', 'Silver', 'Dollar', 'Bitcoin'],
-        'Value': [1500, 15, 1, 60000]
-    }
-    df = pd.DataFrame(data)
-
-    df_rule = DataFrameRule(df)
-    rules = [
-            lambda : df_rule.keep_only_columns(['Name']),
-            lambda : df_rule.rename_columns_to(['AssetName']),
-            lambda : df_rule.sort_by('AssetName', increasing=False),
-            lambda : df_rule.keep_only_values('AssetName', ['Gold', 'Bitcoin'])
-        ]
-
-    df_rule.set_future_rules(rules)
-    new_df = df_rule.apply_future_rules
-
-    print(new_df)

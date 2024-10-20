@@ -7,7 +7,7 @@ class InstrumentType:
     CURRENCY: Final[str] = "CURRENCY"
     COMMODITY: Final[str] = "COMMODITY"
     INDEX: Final[str] = "INDEX"
-    CRYPTO: Final[str] = "CRYPTO"
+    CRYPTO: Final[str] = "CRYPTOCURRENCY"
 
 class Asset:
     """
@@ -17,11 +17,18 @@ class Asset:
         """
         :param code: The unique code of the asset, e.g., 'XAU' for Gold.
         :param name: The name of the asset, e.g., NASDAQ.
-        :param instrument_type: The type of the instrument, e.g., Crypto.
+        :param instrument_type: The type of the instrument, e.g., CRYPTOCURRENCY.
         """
         self._code = code
         self._name = name
         self._instrument_type = instrument_type
+
+    def to_dict(self) -> dict:
+        return {
+            "code": self._code,
+            "name": self._name,
+            "instrument_type": self._instrument_type
+        }
 
     @property
     def code(self):

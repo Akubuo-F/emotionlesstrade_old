@@ -63,7 +63,12 @@ class AbstractDataFrameRule(ABC):
 
     @abstractmethod
     def set_dataframe(self, dataframe: pd.DataFrame) -> None:
-         ...
+        """
+        Set the data frame that rules will be applied to.
+        :param dataframe:
+        :return:
+        """
+        ...
 
     @abstractmethod
     def set_future_rules(self, future_rules: list[Callable[[], "AbstractDataFrameRule"]]) -> None:
