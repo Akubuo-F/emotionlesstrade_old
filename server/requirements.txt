@@ -1,0 +1,5 @@
+pandas
+reportlab
+requests
+beautifulsoup4
+cot_reports
