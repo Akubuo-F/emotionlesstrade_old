@@ -4,13 +4,14 @@ import pandas as pd
 from src.app.features.cot.data.cot_repository import COTRepository
 from src.app.features.cot.data.half_year_cot_report_downloader import HalfYearCOTReportDownloader
 from src.app.features.cot.models.cftc_cot_report_source import CFTCCotReportSource
+from src.app.utils.base.directory_helper import DirectoryHelper
 from src.app.utils.dataframe_rule import DataFrameRule
 
 
 class TestCOTRepository(unittest.TestCase):
 
     def setUp(self):
-        local_csv = "test_local_csv.csv"
+        local_csv = f"{DirectoryHelper.root_dir()}/storage/tests/cot_reports.csv"
         self.cot_repository = COTRepository(
             local_csv,
             HalfYearCOTReportDownloader(

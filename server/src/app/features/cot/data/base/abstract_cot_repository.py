@@ -3,6 +3,7 @@ from abc import ABC, abstractmethod
 import pandas as pd
 
 from src.app.features.cot.data.base.abstract_cot_report_downloader import AbstractCOTReportDownloader
+from src.app.features.cot.models.base.abstract_cot_report_source import AbstractCOTReportSource
 from src.app.utils.base.abstract_dataframe_rule import AbstractDataFrameRule
 
 
@@ -37,3 +38,8 @@ class AbstractCOTRepository(ABC):
         :return: None
         """
         ...
+
+    @property
+    def report_source(self) -> AbstractCOTReportSource:
+        """returns the report source of this COT repository."""
+        return self._cot_report_downloader.report_source

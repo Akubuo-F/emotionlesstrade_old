@@ -11,8 +11,8 @@ from src.app.utils.base.abstract_dataframe_rule import AbstractDataFrameRule
 class HalfYearCOTReportDownloader(AbstractCOTReportDownloader):
 
     def __init__(self, dataframe_rule: AbstractDataFrameRule, report_source: AbstractCOTReportSource):
+        super().__init__(report_source=report_source)
         self._dataframe_rule = dataframe_rule
-        self._report_source = report_source
 
     def download(self) -> pd.DataFrame:
         """Returns 6-months COT reports of each asset as a data frame."""
